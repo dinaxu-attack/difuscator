@@ -18,7 +18,7 @@ difuscator --file main.go --compile
 or 
 
 ```
-difuscator --file main.exe --compile
+difuscator --file main.exe
 ```
 
 
