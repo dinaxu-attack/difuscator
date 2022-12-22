@@ -7,7 +7,7 @@ Difuscator - Simple protector written in Go.
 go install github.com/dinaxu-attack/difuscator 
 ```
 
-#Usage
+# Usage
 
 You can compile
 
