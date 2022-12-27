@@ -14,7 +14,7 @@ import (
 )
 
 func help() {
-	fmt.Println("Usage: \n difuscator --file file.go/file.exe --compile (optional)")
+	fmt.Println("Usage: \n difuscator --file file.go/file.exe --compile (optional) --obfuscate (optional)")
 }
 
 var BuildFileName string
@@ -61,6 +61,7 @@ func launch(file string, compile, obfuscate bool) {
 		}
 	}
 
+	time.Sleep(2 * time.Second)
 	if compile {
 		fmt.Print("Compiling...")
 		err, filename := app.Compile(file)
