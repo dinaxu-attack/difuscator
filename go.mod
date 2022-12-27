@@ -2,6 +2,7 @@ module github.com/dinaxu-attack/difuscator
 
 go 1.19
 
+
 require (
 	github.com/creativeprojects/encryption v0.0.0-20210616211310-01b1a121d569
 	github.com/fatih/color v1.13.0

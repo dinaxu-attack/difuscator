@@ -10,7 +10,6 @@ import (
 	"time"
 
 	"github.com/dinaxu-attack/difuscator/app"
-
 	"github.com/fatih/color"
 )
 
@@ -33,17 +32,34 @@ func main() {
 
 	file := flag.String("file", "", "")
 	compile := flag.Bool("compile", false, "")
+	obfuscate := flag.Bool("obfuscate", false, "")
 	flag.Parse()
+
+	if *obfuscate == true && *compile != true {
+		fmt.Println("Unable to obfuscate a non .go file! Use flag --compile --obfuscate")
+		os.Exit(0)
+	}
 
 	if *file == "" {
 		help()
 		os.Exit(0)
 	}
 
-	launch(*file, *compile)
+	launch(*file, *compile, *obfuscate)
 }
 
-func launch(file string, compile bool) {
+func launch(file string, compile, obfuscate bool) {
+
+	if obfuscate {
+		fmt.Print("Obfuscating... ")
+
+		err := app.Obfuscate()
+		if err != nil {
+			fmt.Printf(app.ErrorColor, "\t\t[ ERR ]\n")
+		} else {
+			fmt.Printf(app.SuccessColor, "\t\t[ OK ]\n")
+		}
+	}
 
 	if compile {
 		fmt.Print("Compiling...")
