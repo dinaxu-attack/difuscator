@@ -90,7 +90,7 @@ func launch(file string, compile bool) {
 
 	app.Stat(BuildFileName)
 
-	color.Green("Size: " + "\n" + strconv.Itoa(int(app.Old/1024.0)) + " MB -> " + strconv.Itoa(int(app.New/1024.0)) + " MB")
+	color.Green(strconv.Itoa(int(app.Old/1024.0)) + " MB -> " + strconv.Itoa(int(app.New/1024.0)) + " MB")
 
 	fmt.Println("Github: https://github.com/dinaxu-attack/difuscator")
 	color.HiWhite("\nYour build: " + color.GreenString(BuildFileName))
