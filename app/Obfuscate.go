@@ -56,14 +56,16 @@ func readDir(path string) {
 
 }
 
-func Obfuscate() error {
+func Obfuscate(file string) error {
 
 	ReadFiles()
 
 	for _, i := range target {
 		d := trim(i)
-		res := strings.ReplaceAll(i, d, uniqueName()+".go")
-		os.Rename(i, res)
+		if i != file {
+			res := strings.ReplaceAll(i, d, uniqueName()+".go")
+			os.Rename(i, res)
+		}
 	}
 	return nil
 }

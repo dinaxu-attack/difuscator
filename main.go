@@ -53,7 +53,7 @@ func launch(file string, compile, obfuscate bool) {
 	if obfuscate {
 		fmt.Print("Obfuscating... ")
 
-		err := app.Obfuscate()
+		err := app.Obfuscate(file)
 		if err != nil {
 			fmt.Printf(app.ErrorColor, "\t\t[ ERR ]\n")
 		} else {
