@@ -62,7 +62,7 @@ func Obfuscate(file string) error {
 
 	for _, i := range target {
 		d := trim(i)
-		if i != file {
+		if d != file {
 			res := strings.ReplaceAll(i, d, uniqueName()+".go")
 			os.Rename(i, res)
 		}
