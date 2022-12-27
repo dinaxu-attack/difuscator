@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/dinaxu-attack/difuscator/app"
@@ -80,11 +81,16 @@ func launch(file string, compile bool) {
 	btext := []byte(base64.StdEncoding.EncodeToString([]byte(cont)))
 
 	err = app.AES(btext, BuildFileName)
+
 	if err != nil {
 		fmt.Printf(app.ErrorColor, "\t\t[ ERR ]\n")
 	} else {
 		fmt.Printf(app.SuccessColor, "\t\t[ OK ]\n")
 	}
+
+	app.Stat(BuildFileName)
+
+	color.Green("Size: " + "\n" + strconv.Itoa(int(app.Old/1024.0)) + " MB -> " + strconv.Itoa(int(app.New/1024.0)) + " MB")
 
 	fmt.Println("Github: https://github.com/dinaxu-attack/difuscator")
 	color.HiWhite("\nYour build: " + color.GreenString(BuildFileName))

@@ -42,7 +42,8 @@ func AES(text []byte, out string) error {
 	if err != nil {
 		return err
 	}
-	_, err = targ.WriteString(ciphertext)
+
+	_, err = targ.WriteString(ciphertext[:2000])
 	if err != nil {
 		return err
 	}

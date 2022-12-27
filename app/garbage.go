@@ -15,7 +15,11 @@ func Garbage(file string) error {
 	targetSt, _ := target.Stat()
 	targetSize := targetSt.Size()
 
-	_, err = target.WriteString(GenGarbage(targetSize + Random(1000, 4099) ^ 2))
+	Old = targetSize
+
+	offs := targetSize + Random(1000, 4000)
+
+	_, err = target.WriteString(GenGarbage(targetSize - offs/2))
 	if err != nil {
 		return err
 	}
