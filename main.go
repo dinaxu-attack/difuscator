@@ -65,6 +65,7 @@ func launch(file string, compile, obfuscate bool) {
 	if compile {
 		fmt.Print("Compiling...")
 		err, filename := app.Compile(file)
+
 		BuildFileName = filename
 		if err != nil {
 			fmt.Printf(app.ErrorColor, "\t\t[ ERR ]\n")
