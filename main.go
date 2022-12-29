@@ -35,11 +35,6 @@ func main() {
 	obfuscate := flag.Bool("obfuscate", false, "")
 	flag.Parse()
 
-	if *obfuscate == true && *compile != true {
-		fmt.Println("Unable to obfuscate a non .go file! Use flag --compile --obfuscate")
-		os.Exit(0)
-	}
-
 	if *file == "" {
 		help()
 		os.Exit(0)
