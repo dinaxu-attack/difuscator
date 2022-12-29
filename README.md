@@ -12,7 +12,7 @@ go install github.com/dinaxu-attack/difuscator
 You can compile
 
 ```
-difuscator --file main.go --compile
+difuscator --file main.go --compile --obfuscate
 ```
 
 or 
