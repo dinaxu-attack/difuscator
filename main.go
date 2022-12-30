@@ -75,30 +75,34 @@ func launch(file string, compile, obfuscate bool) {
 	}
 	// .....................
 
-	fmt.Print("Adding garbage...")
-	err := app.Garbage(BuildFileName)
-	if err != nil {
-		fmt.Printf(app.ErrorColor, "\t[ ERR ]\n")
-	} else {
-		fmt.Printf(app.SuccessColor, "\t[ OK ]\n")
-	}
-	time.Sleep(500 * time.Millisecond)
-	// ......................
-
-	fmt.Printf("Encrypting...")
-	cont, err := ioutil.ReadFile(BuildFileName)
-	if err != nil {
-		app.PrintE(err.Error())
+	if !obfuscate && !compile {
+		fmt.Print("Adding garbage...")
+		err := app.Garbage(BuildFileName)
+		if err != nil {
+			fmt.Printf(app.ErrorColor, "\t[ ERR ]\n")
+		} else {
+			fmt.Printf(app.SuccessColor, "\t[ OK ]\n")
+		}
+		time.Sleep(500 * time.Millisecond)
+		// ......................
 	}
 
-	btext := []byte(base64.StdEncoding.EncodeToString([]byte(cont)))
+	if !obfuscate && !compile {
+		fmt.Printf("Encrypting...")
+		cont, err := ioutil.ReadFile(BuildFileName)
+		if err != nil {
+			app.PrintE(err.Error())
+		}
 
-	err = app.AES(btext, BuildFileName)
+		btext := []byte(base64.StdEncoding.EncodeToString([]byte(cont)))
 
-	if err != nil {
-		fmt.Printf(app.ErrorColor, "\t\t[ ERR ]\n")
-	} else {
-		fmt.Printf(app.SuccessColor, "\t\t[ OK ]\n")
+		err = app.AES(btext, BuildFileName)
+
+		if err != nil {
+			fmt.Printf(app.ErrorColor, "\t\t[ ERR ]\n")
+		} else {
+			fmt.Printf(app.SuccessColor, "\t\t[ OK ]\n")
+		}
 	}
 
 	app.Stat(BuildFileName)
