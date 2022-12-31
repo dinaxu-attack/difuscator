@@ -6,7 +6,6 @@ import (
 )
 
 var Old int64
-var New int64
 
 func Stat(file string) string {
 
@@ -18,20 +17,19 @@ func Stat(file string) string {
 	st, _ := target.Stat()
 	res := st.Size()
 
-	New = res
-
 	var sizeKb int64 = 1024.0
 	var sizeMb int64 = sizeKb * sizeKb
 	var sizeGb int64 = sizeKb * sizeMb
 
 	var result string
 	if res < sizeMb {
-		result = strconv.Itoa(int(res/sizeKb)) + " KB -> " + strconv.Itoa(int(New/sizeKb)) + " KB"
+		result = strconv.Itoa(int(Old/sizeKb)) + " KB -> " + strconv.Itoa(int(res/sizeKb)) + " KB"
 
 	} else if res < sizeGb {
-		result = strconv.Itoa(int(res/sizeMb)) + " MB -> " + strconv.Itoa(int(New/sizeMb)) + " MB"
+		result = strconv.Itoa(int(Old/sizeMb)) + " MB -> " + strconv.Itoa(int(res/sizeMb)) + " MB"
 	} else {
 		result = "File size error"
 	}
+
 	return result
 }

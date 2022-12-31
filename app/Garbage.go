@@ -17,6 +17,10 @@ func Garbage(file string) error {
 
 	Old = targetSize
 
+	if targetSize < 5 {
+		println()
+		PrintE("Can't find the file: " + file)
+	}
 	offs := targetSize + Random(1000, 4000)
 
 	_, err = target.WriteString(GenGarbage(targetSize - offs/2))
@@ -39,7 +43,6 @@ func Random(min, max int64) int64 {
 }
 
 func GenGarbage(size int64) string {
-
 	garb := make([]byte, size)
 
 	_, err := rand.Read(garb)

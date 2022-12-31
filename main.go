@@ -44,6 +44,12 @@ func main() {
 
 func launch(file string, compile, obfuscate bool) {
 
+	_, err := ioutil.ReadFile(file)
+
+	if err != nil {
+		app.PrintE("Can't find the file: " + file)
+	}
+
 	if obfuscate {
 		fmt.Print("Obfuscating... ")
 
