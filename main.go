@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/dinaxu-attack/difuscator/app"
@@ -80,7 +81,7 @@ func launch(file string, compile, obfuscate bool) {
 	}
 	// .....................
 
-	if compile {
+	if strings.Contains(file, ".go") == false {
 		fmt.Print("Adding garbage...")
 		err := app.Garbage(BuildFileName)
 		if err != nil {
