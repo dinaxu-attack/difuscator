@@ -80,7 +80,7 @@ func launch(file string, compile, obfuscate bool) {
 	}
 	// .....................
 
-	if !obfuscate && !compile {
+	if compile {
 		fmt.Print("Adding garbage...")
 		err := app.Garbage(BuildFileName)
 		if err != nil {
