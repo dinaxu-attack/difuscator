@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"strconv"
 	"time"
 
 	"github.com/dinaxu-attack/difuscator/app"
@@ -88,15 +87,21 @@ func launch(file string, compile, obfuscate bool) {
 	}
 
 	if !obfuscate && !compile {
-		fmt.Printf("Encrypting...")
+		fmt.Printf("Compressing...")
 		cont, err := ioutil.ReadFile(BuildFileName)
 		if err != nil {
 			app.PrintE(err.Error())
 		}
-
 		btext := []byte(base64.StdEncoding.EncodeToString([]byte(cont)))
+		compressed, err := app.Compress(btext)
+		if err != nil {
+			fmt.Printf(app.ErrorColor, "\t\t[ ERR ]\n")
+		} else {
+			fmt.Printf(app.SuccessColor, "\t\t[ OK ]\n")
+		}
+		fmt.Printf("Encrypting...")
 
-		err = app.AES(btext, BuildFileName)
+		err = app.AES(compressed, BuildFileName)
 
 		if err != nil {
 			fmt.Printf(app.ErrorColor, "\t\t[ ERR ]\n")
@@ -105,9 +110,7 @@ func launch(file string, compile, obfuscate bool) {
 		}
 	}
 
-	app.Stat(BuildFileName)
-
-	color.Green(strconv.Itoa(int(app.Old/1024.0)) + " MB -> " + strconv.Itoa(int(app.New/1024.0)) + " MB")
+	color.Green(app.Stat(BuildFileName))
 
 	fmt.Println("Github: https://github.com/dinaxu-attack/difuscator")
 	color.HiWhite("\nYour build: " + color.GreenString(BuildFileName))
