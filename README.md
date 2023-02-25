@@ -20,4 +20,6 @@ difuscator -o build.exe -c -obf
 ```
 
 # Showcase
-![image](https://user-images.githubusercontent.com/102496559/210157003-435f7de1-22e6-4ef9-ae41-5b827266095b.png)
+
+https://user-images.githubusercontent.com/102496559/221383520-dc40524b-81d9-4820-a894-d1f6c67e6674.mp4
+
