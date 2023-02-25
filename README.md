@@ -9,16 +9,14 @@ go install github.com/dinaxu-attack/difuscator
 
 # Usage
 
-You can compile
-
 ```
-difuscator --file main.go --compile --obfuscate
+difuscator [-o output (Example build.exe) ] [-c compile (bool) ] [-obf (bool) ]
 ```
 
-or 
+# Example 
 
 ```
-difuscator --file main.exe
+difuscator -o build.exe -c -obf
 ```
 
 # Showcase
