@@ -10,14 +10,29 @@ go install github.com/dinaxu-attack/difuscator
 # Usage
 
 ```
-difuscator [-o output (Example build.exe) ] [-c compile (bool) ] [-obf (bool) ]
+difuscator [-o (Example build.exe) ] [-c (bool) ] [-obf (bool) ] [-j (bool) ] [-g (bool) ]
+-o: Output. Build name
+-c: Compile
+-obf: Obfuscation (Random files name)
+-j: Junk code (Random go code)
+-g: Garbage
 ```
 
 # Example 
 
 ```
-difuscator -o build.exe -c -obf
+difuscator -o build.exe -c -obf -j -g
 ```
+
+# Difuscator capabilities
+
+| Function | Support |
+|---|---|
+|`Encryption`|❌|
+|`File and code obfuscation`|✅|
+|`Junk Code`|✅|
+|`Garbage`|✅|
+
 
 # Showcase
 
