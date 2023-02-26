@@ -24,7 +24,7 @@ func Garbage(file string) error {
 	}
 	offs := targetSize + Random(5000, 10000)
 
-	for i := 0; i <= 300; i++ {
+	for i := 0; i <= 200; i++ {
 		_, err = target.WriteString(GenGarbage(targetSize - offs/2)[:Random(1000, 3000)])
 	}
 	if err != nil {

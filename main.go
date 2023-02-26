@@ -27,6 +27,8 @@ func main() {
 
 	output := flag.String("o", "", "")
 	obfuscate := flag.Bool("obf", false, "")
+	junk := flag.Bool("j", false, "")
+	garbage := flag.Bool("g", false, "")
 	compile := flag.Bool("c", false, "")
 	flag.Parse()
 
@@ -38,10 +40,10 @@ func main() {
 		help()
 	}
 
-	launch(*compile, *obfuscate, *output)
+	launch(*compile, *obfuscate, *output, *junk, *garbage)
 }
 
-func launch(compile bool, obf bool, output string) {
+func launch(compile bool, obf bool, output string, junk bool, garbage bool) {
 
 	go func() {
 		for per := 0; per <= 100; per++ {
@@ -66,16 +68,24 @@ func launch(compile bool, obf bool, output string) {
 			os.Exit(0)
 		}
 
-		fmt.Printf("\r[##################################################]")
-		internal.Garbage(output)
-		println()
-		color.Green(internal.Stat(output))
 	}
+	if garbage {
+		internal.Garbage(output)
+	}
+
+	if junk {
+		internal.GetMain("./")
+		internal.JunkCode()
+	}
+
+	fmt.Printf("\r[##################################################]")
+	println()
+	color.Green(internal.Stat(output))
 }
 
 func help() {
 
-	fmt.Println(`Usage: difuscator [-o output (Example build.exe) ] [-c compile (bool) ] [-obf (bool) ]`)
+	fmt.Println(`Usage: difuscator [-o (Example build.exe) ] [-c (bool) ] [-obf (bool) ] [-j (bool) ] [-g (bool) ]` + "\n\n-o: Output. Build name\n-c: Compile\n-obf: Obfuscation (Random files name)\n-j: Junk code (Random go code)\n-g: Garbage")
 	os.Exit(0)
 }
 

@@ -6,12 +6,15 @@ import (
 	random "math/rand"
 	"os"
 	"path/filepath"
+	"time"
 )
 
 var Names = make([]string, 0)
+var FuncsNames = make([]string, 0)
+var Vars = make([]string, 0)
 
 func UniqueName() string {
-	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
 	s := make([]rune, Random(4, 10))
 	for i := range s {
@@ -24,6 +27,75 @@ func UniqueName() string {
 			}
 		}
 	}
+	return string(s)
+
+}
+
+func UniqueFunc() string {
+	var letters = []rune("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+	s := make([]rune, Random(4, 10))
+	for i := range s {
+		s[i] = letters[random.Intn(len(letters))]
+		for _, i := range FuncsNames {
+			if string(s) == i {
+				UniqueFunc()
+			} else {
+				FuncsNames = append(FuncsNames, string(s))
+			}
+		}
+	}
+	return string(s)
+
+}
+
+func UniqueVar() string {
+	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+	s := make([]rune, Random(4, 10))
+	for i := range s {
+		s[i] = letters[random.Intn(len(letters))]
+		for _, i := range Vars {
+			if string(s) == i {
+				UniqueVar()
+			} else {
+				Vars = append(Vars, string(s))
+			}
+		}
+	}
+	return string(s)
+
+}
+func RandomArray(arr []string) string {
+	cStrs := len(arr)
+
+	s1 := random.NewSource(time.Now().UnixNano())
+	r1 := random.New(s1)
+
+	randstr := arr[r1.Intn(cStrs)]
+	return randstr
+}
+
+func RandomString(min int64, max int64) string {
+	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+	s := make([]rune, Random(min, max))
+	for i := range s {
+		s[i] = letters[random.Intn(len(letters))]
+	}
+
+	return string(s)
+
+}
+
+func RandomComment(min int64, max int64) string {
+	var letters = []rune("abcdefghijklmnopqrstuvwxyz")
+
+	s := make([]rune, Random(min, max))
+	for i := range s {
+		s[i] = letters[random.Intn(len(letters))]
+	}
+
 	return string(s)
 
 }
