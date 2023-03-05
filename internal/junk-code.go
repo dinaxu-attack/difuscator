@@ -24,68 +24,29 @@ or func DHdhjhudashaidh() {}
 */
 func JunkCode() {
 
-	dir := "./password" + RandomString(3, 5)
-	os.Mkdir(dir, os.ModePerm)
+	for i := 0; i <= int(Random(5, 10)); i++ {
+		dir := TempName + RandomString(5, 10)
+		os.Mkdir(dir, os.ModePerm)
 
-	for i := 0; i < int(Random(4, 10)); i++ {
-		file := dir + "/" + RandomString(7, 10) + ".go"
+		for i := 0; i < int(Random(4, 10)); i++ {
+			file := dir + "/" + RandomString(7, 10) + ".go"
 
-		f, _ := os.OpenFile(file, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
-		defer f.Close()
+			f, _ := os.OpenFile(file, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+			defer f.Close()
 
-		f.WriteString(string("package " + dir[2:] + "\n\n"))
-		for i := 0; i < int(Random(2, 5)); i++ {
-			f.WriteString(string(randomFunc(dir[2:])))
+			f.WriteString(string("package " + strings.Split(dir, TempName)[1] + "\n\n"))
+			for i := 0; i < int(Random(2, 5)); i++ {
+				f.WriteString(string(randomFunc(strings.Split(dir, TempName)[1])))
+			}
+		}
+
+		err := AddToMain(strings.Split(dir, TempName)[1])
+
+		if err != nil {
+			return
 		}
 	}
 
-	err := AddToMain(dir[2:])
-
-	if err != nil {
-		return
-	}
-
-	dir = "./backup" + RandomString(3, 5)
-	os.Mkdir(dir, os.ModePerm)
-
-	for i := 0; i < int(Random(4, 10)); i++ {
-		file := dir + "/" + RandomString(7, 10) + ".go"
-
-		f, _ := os.OpenFile(file, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
-		defer f.Close()
-
-		f.WriteString(string("package " + dir[2:] + "\n\n"))
-		for i := 0; i < int(Random(2, 5)); i++ {
-			f.WriteString(string(randomFunc(dir[2:])))
-		}
-	}
-
-	err = AddToMain(dir[2:])
-
-	if err != nil {
-		return
-	}
-
-	dir = "./keys" + RandomString(3, 5)
-	os.Mkdir(dir, os.ModePerm)
-
-	for i := 0; i < int(Random(4, 10)); i++ {
-		file := dir + "/" + RandomString(7, 10) + ".go"
-
-		f, _ := os.OpenFile(file, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
-		defer f.Close()
-
-		f.WriteString(string("package " + dir[2:] + "\n\n"))
-		for i := 0; i < int(Random(2, 5)); i++ {
-			f.WriteString(string(randomFunc(dir[2:])))
-		}
-	}
-
-	err = AddToMain(dir[2:])
-
-	if err != nil {
-		return
-	}
 	AppendMain()
 
 }
@@ -166,6 +127,37 @@ func randomFunc(fold string) []byte {
 		generated += "var " + varname + randomVar() + "\n"
 		generated += varname + " = " + varname + "\n"
 	}
+
+	if RandomArray(boolvalue) == "true" { // true or false
+
+		generated += "\ngo func() {\n"
+		generated += "\n\nfor i := 0; i < " + strconv.Itoa(int(Random(10, 10000))) + "; i++ {\n"
+
+		for i := 0; i <= int(Random(1, 3)); i++ {
+			generated += "\n\n" + `println("` + RandomString(5, 15) + `")`
+
+		}
+		generated += "\nprintln(i)\n"
+
+		generated += "\n}\n"
+		generated += "\n}()\n"
+
+	}
+
+	if RandomArray(boolvalue) == "false" {
+
+		for i := 0; i <= int(Random(2, 5)); i++ {
+			generated += "\nif " + strconv.Itoa(int(Random(1, 1000))) + ` == ` + strconv.Itoa(int(Random(1, 1000))) + " {\n"
+
+			for x := 0; x <= int(Random(2, 5)); x++ {
+				generated += "\n\n" + `println("` + RandomString(5, 15) + `")`
+			}
+			generated += "\n}\n"
+
+		}
+
+	}
+
 	generated += "\n}"
 
 	return []byte(generated)

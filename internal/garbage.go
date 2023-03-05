@@ -19,6 +19,7 @@ func Garbage(file string) error {
 	Old = targetSize
 
 	if targetSize < 5 {
+
 		fmt.Println("\nCan't find the file: " + file)
 		os.Exit(0)
 	}

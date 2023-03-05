@@ -55,12 +55,13 @@ func launch(compile bool, obf bool, output string, junk bool, garbage bool) {
 		}
 	}()
 
+	internal.CopyFiles("./")
 	if obf {
-		internal.ObfuscateFiles("./")
+		internal.ObfuscateFiles("./" + internal.TempName)
 	}
 	if compile {
 
-		internal.GetMain("./")
+		internal.GetMain("./" + internal.TempName)
 
 		err := internal.Compile(output)
 
@@ -74,7 +75,7 @@ func launch(compile bool, obf bool, output string, junk bool, garbage bool) {
 	}
 
 	if junk {
-		internal.GetMain("./")
+		internal.GetMain("./" + internal.TempName)
 		internal.JunkCode()
 	}
 
